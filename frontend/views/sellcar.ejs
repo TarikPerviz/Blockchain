@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HajroTare | CarDealership - Sell Car</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body class="d-flex flex-column justify-content-center align-items-center vh-100 bg-liliac kumbh-sans-regular text-white">
+    <!-- In case Metamask is not present in the browser window or it it not installed in the extensions -->
+    <div id="isNotConnected" class="d-flex flex-column justify-content-center align-items-center vh-100">
+        <img src="assets/logo.png" alt="metamasklogo" class="meta-mask-logo">
+        <h1 class="fw-bold h1 display-3">No metamask Installed!</h1>
+        <h2 class="text-center">Please use a browser that supports MetaMask and download it as an extension!</h2>
+    </div>
+
+    <!-------------------- In case it actually is present, show the application -------------------------->
+    <div id="isConnected" class="d-flex flex-column justify-content-center align-items-center vh-100">
+
+        <!---------------- Section to physically connect to MetaMask using a button ---------------------->
+        <div class="connection">
+            <h2 id="loginHeader" class="text-center">Log in with Metamask:</h2>
+            <p id="loginMessage">Please log in with Metamask in order to use our application!</p>
+        </div>
+
+        <div id="main" class="d-none vh-100 vw-100">
+        <!---------- Main section to display the application ---------->
+        <nav class="navbar navbar-expand-lg bg-liliac-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">CarDealership</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/cars">All Cars</a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="merchantOption" class="nav-link active" href="/sell">Sell Cars</a>
+                  </li>
+                </ul>
+                <span id="username" class="navbar-text px-3 fw-bold"></span>
+                <a class="btn btn-outline-primary" href="/profile">Profile</a>
+              </div>
+            </div>
+          </nav>
+
+        <main id="mainContainer" class="container-fluid d-flex flex-column justify-content-center align-items-center my-3">
+            <form id="carSubmitForm">
+                <div class="row">
+                    <div class="col-6">
+                            <div class="mb-3">
+                                <label for="carName" class="form-label">Car Name</label>
+                                <input type="text" class="form-control" id="carName" placeholder="Enter car name" required>
+                            </div>
+                        
+                            <div class="mb-3">
+                                <label for="carBrand" class="form-label">Car Brand</label>
+                                <select class="form-select" id="carBrand" required>
+                                    <option value="" disabled selected>Select Car Brand</option>
+                                    <option value="0">BMW</option>
+                                    <option value="1">Mercedes</option>
+                                    <option value="2">Audi</option>
+                                    <option value="3">Volkswagen</option>
+                                    <option value="4">Skoda</option>
+                                    <option value="5">Ferrari</option>
+                                    <option value="6">Lamborghini</option>
+                                    <option value="7">Seat</option>
+                                    <option value="8">Renault</option>
+                                    <option value="9">Ford</option>
+                                    <option value="10">Fiat</option>
+                                    <option value="11">Suzuki</option>
+                                    <option value="12">Other</option>
+                                </select>
+                            </div>
+                        
+                            <div class="mb-3">
+                                <label for="carModel" class="form-label">Car Model</label>
+                                <input type="text" class="form-control" id="carModel" placeholder="Enter car model" required>
+                            </div>
+                        
+                            <div class="mb-3">
+                                <label for="productionYear" class="form-label">Production Year</label>
+                                <select class="form-select" id="productionYear" required>
+                                    <option value="" disabled selected>Select Production Year</option>
+                                    <!-- Generate years from 1990 to 2025 dynamically (if necessary) -->
+                                    <option value="1990">1990</option>
+                                    <option value="1991">1991</option>
+                                    <option value="1992">1992</option>
+                                    <option value="1993">1993</option>
+                                    <option value="1994">1994</option>
+                                    <option value="1995">1995</option>
+                                    <option value="1996">1996</option>
+                                    <option value="1997">1997</option>
+                                    <option value="1998">1998</option>
+                                    <option value="1999">1999</option>
+                                    <option value="2000">2000</option>
+                                    <option value="2001">2001</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2007">2007</option>
+                                    <option value="2008">2008</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2010">2010</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="kilometers" class="form-label">Kilometers</label>
+                                <input type="number" class="form-control" id="kilometers" placeholder="Enter kilometers" required>
+                            </div>
+
+                        <div class="mb-3">
+                            
+                            <label for="engine" class="form-label">Engine Type</label>
+                            <select class="form-select" id="engine" required>
+                                <option value="" disabled selected>Select Engine Type</option>
+                                <option value="0">Diesel</option>
+                                <option value="1">Petrol</option>
+                                <option value="2">Gas</option>
+                                <option value="3">Electric</option>
+                            </select>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price (in WEI)</label>
+                            <input type="number" class="form-control" id="price" placeholder="Enter price in WEI" required>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="engineDisplacement" class="form-label">Engine Displacement</label>
+                            <input type="number" class="form-control" id="engineDisplacement" placeholder="Enter engine displacement (in cc)" required>
+                        </div>
+                </div>
+                <div class="">
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </div>
+            </div>
+            </form>
+        </main>
+
+        <!-- MODAL THAT SERVES AS BLOCK UI -->
+        <div class="modal fade" id="addCarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCarLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Adding your car...</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    
+    <!-- Web3 and Bootstrap Script for styling -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Script to access the actual contract from the frontend: -->
+    <script src="js/utils.js"></script>
+    <script src="js/web3provider.js"></script>
+    <script>
+        const username = document.querySelector("#username")
+        const mechant_option = document.querySelector("#merchantOption")
+        const form = document.querySelector("#carSubmitForm")
+
+        if (typeof window.ethereum !== 'undefined') {
+            disconnected_div.classList.add("d-none")
+        } else {
+            connected_div.classList.add("d-none")
+        }
+
+        setTimeout(async () => {
+            isMerch = await isMerchant();
+
+            if(isMerch){
+                const merchantData = await getMerchantData();
+                // to use later in the form
+            } else {
+                alert("A non merchant has accessed the sell cars module!Redirecting...")
+                window.location.href = "/"
+            }
+        }, 500)
+
+        form.addEventListener("submit", async (e) => {
+
+            const modal = new bootstrap.Modal(document.getElementById("addCarModal"));
+
+            e.preventDefault();
+            // Grab values from form elements
+            const carName = document.getElementById("carName").value;
+            const carBrand = document.getElementById("carBrand").value;
+            const carModel = document.getElementById("carModel").value;
+            const productionYear = document.getElementById("productionYear").value;
+            const kilometers = document.getElementById("kilometers").value;
+            const engine = document.getElementById("engine").value;
+            const price = document.getElementById("price").value;
+            const engineDisplacement = document.getElementById("engineDisplacement").value;
+
+            let thumbnail;
+
+            switch (carBrand) {
+                case "0": // BMW
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreibkkcm2iqwnx6zp6far5mbbyepzhtsvxkd6iasz5szuupob2aldrq";
+                    break;
+                case "1": // MERCEDES
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreidgtvlxofg4y7ywk7xnd5toplzt6iepi7munh6cu7sv4lcel5jj74";
+                    break;
+                case "2": // AUDI
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreicslpxahjutdsv2uvdvqphqm3qcqfbz3le55242yzm54fcefwlj3y";
+                    break;
+                case "3": // VW
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreidnbwjfc4x22crascjogyula7jws5mybzwow3r5j4qvjajspqlzgq";
+                    break;
+                case "4": // SKODA
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreihfnvhptq3ejvvoxoj6lbgywfyk5hgsajsq52wuz3qfgunyar6b2q";
+                    break;
+                case "5": // FERRARI
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreidi5pqctqxhvo2jqrx56xzmut5bymz7hfwck34w6qshdra3hc7hbm";
+                    break;
+                case "6": // LAMBORGHINI
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreifvs7smudy7upwgwy7kwbxvspdcys3hvxedxdqoop67iyuqscufem";
+                    break;
+                case "7": // SEAT
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreicwntlb2vbl4wxjvyxcjtxglwryawcupz5mgexi2yw3pfawlvhfca";
+                    break;
+                case "8": // RENAULT
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreidy7j56ge4p745g4glgsnd4w627nbt5roidr5cheolr2tvf7hhwri";
+                    break;
+                case "9": // FORD
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreiblcmyilnek5hmda7v63k3654k6j6hqkv2v7siidsx2zu4hcogu4y";
+                    break;
+                case "10": // FIAT
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreiaimi3dqjfwomwke6yxlq3tqgecxqd3oa4qpmtfbpsx4qaapbappm";
+                    break;
+                case "11": // SUZUKI
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreidc7aejsrjgzgauybt7p2viy7pbxleedfwrx6ww2hyr7vypllzb2m";
+                    break;
+                case "12": // OTHER
+                    thumbnail = "https://amber-impressive-silverfish-128.mypinata.cloud/ipfs/bafkreibhek2ibd5aeorz7kwy6e2js4g6llh6gvwqjaxoh3iep2o6ejvgui";
+                    break;
+                default:
+                    break;
+            }
+
+            // Log the values (for debugging purposes)
+            console.log({
+                carName,
+                carBrand,
+                carModel,
+                productionYear,
+                kilometers,
+                engine,
+                price,
+                engineDisplacement,
+                thumbnail
+            });
+
+            modal.show();
+            await addCarForSale(carName, carBrand, carModel, productionYear, kilometers, engine, price, engineDisplacement, thumbnail)
+            modal.hide();
+            form.reset();
+        })
+
+
+      
+
+    </script>
+</body>
+</html>

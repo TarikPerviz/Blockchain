@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HajroTare | CarDealership</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body class="d-flex flex-column justify-content-center align-items-center vh-100 bg-liliac kumbh-sans-regular text-white">
+    <!-- In case Metamask is not present in the browser window or it it not installed in the extensions -->
+    <div id="isNotConnected" class="d-flex flex-column justify-content-center align-items-center vh-100">
+        <img src="assets/logo.png" alt="metamasklogo" class="meta-mask-logo">
+        <h1 class="fw-bold h1 display-3">No metamask Installed!</h1>
+        <h2 class="text-center">Please use a browser that supports MetaMask and download it as an extension!</h2>
+    </div>
+
+    <!-------------------- In case it actually is present, show the application -------------------------->
+    <div id="isConnected" class="d-flex flex-column justify-content-center align-items-center vh-100">
+
+        <!---------------- Section to physically connect to MetaMask using a button ---------------------->
+        <div class="connection">
+            <h2 id="loginHeader" class="text-center">Log in with Metamask:</h2>
+            <p id="loginMessage">Please log in with Metamask in order to use our application!</p>
+        </div>
+
+        <div id="main" class="d-none vh-100 vw-100">
+        <!---------- Main section to display the application ---------->
+        <nav class="navbar navbar-expand-lg bg-liliac-light sticky-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">CarDealership</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/cars">All Cars</a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="merchantOption" class="nav-link d-none" href="/sell">Sell Cars</a>
+                  </li>
+                </ul>
+                <span id="username" class="navbar-text px-3 fw-bold"></span>
+
+                <button class="btn btn-outline-primary" type="submit">Profile</button>
+              </div>
+            </div>
+          </nav>
+
+        <main id="mainContainer" class="container-fluid d-flex flex-column justify-content-center align-items-center my-3">
+            <div id="spinner-main-profile" class="spinner-border spinner-border-lg mx-4" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <section id="details" class="fade-in d-flex flex-column align-items-center justify-content-center">
+                <h2>First Name:</h2>
+                <h2>Last Name:</h2>
+                <h2>Username:</h2>
+                <h2>Favourite Car Brand:</h2>
+            </section>
+
+            <section id="cars" class="d-flex flex-row flex-wrap">
+                
+            </section>
+        </main>
+
+        <footer class="p-5 w-100 text-center">
+            IBU @ Blockchain Fundamentals
+        </footer>
+
+        </div>
+    </div>
+    
+    <!-- Web3 and Bootstrap Script for styling -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Script to access the actual contract from the frontend: -->
+     <script src="js/utils.js"></script>
+    <script src="js/web3provider.js"></script>
+    <script>
+        const username = document.querySelector("#username")
+        const spinner_main_profile = document.querySelector("#spinner-main-profile")
+        const mechant_option = document.querySelector("#merchantOption")
+        const details_section = document.querySelector("#details");
+        const cars_section = document.querySelector("#cars");
+
+        if (typeof window.ethereum !== 'undefined') {
+            disconnected_div.classList.add("d-none")
+        } else {
+            connected_div.classList.add("d-none")
+        }
+
+        setTimeout(async () => {
+            isMerch = await isMerchant();
+
+            if(isMerch){
+                const merchantData = await getMerchantData();
+                username.innerHTML = merchantData.username;
+                
+                spinner_main_profile.classList.add("d-none")
+                mechant_option.classList.remove("d-none")
+                details_section.classList.add("show")
+
+                details_section.innerHTML = 
+                `
+                <h2>First Name: ${merchantData.first_name}</h2>
+                <h2>Last Name: ${merchantData.last_name}</h2>
+                <h2>Username: ${merchantData.username}</h2>
+                <h2>Favourite Car Brand: ${Utils.getCarBrandName(Number(merchantData.favourite_car_brand))}</h2>
+                ` 
+
+                setTimeout(() => {
+                    Utils.loadUploadedCars(cars_section);
+                }, 500)
+
+
+
+            } else {
+                const customerData = await getCustomerData();
+                username.innerHTML = customerData.username;
+
+                spinner_main_profile.classList.add("d-none");
+                details_section.classList.add("show")
+
+                details_section.innerHTML = 
+                `
+                <h2>Profile Details</h2>
+                <p class="fs-3">First Name: <em>${customerData.first_name}</em></p>
+                <p class="fs-3">Last Name: <em>${customerData.last_name}</em></p>
+                <p class="fs-3">Username: <em>${customerData.username}</em></p>
+                <p class="fs-3">Favourite Car Brand: <em>${Utils.getCarBrandName(Number(customerData.favourite_car_brand))}</em></p>
+                ` 
+
+                setTimeout(() => {
+                    Utils.loadBoughtCars(cars_section);
+                }, 500)
+
+            }
+        }, 500)
+      
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HajroTare | CarDealership</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body class="d-flex flex-column justify-content-center align-items-center vh-100 bg-liliac kumbh-sans-regular text-white">
+    <!-- In case Metamask is not present in the browser window or it it not installed in the extensions -->
+    <div id="isNotConnected" class="d-flex flex-column justify-content-center align-items-center vh-100">
+        <img src="assets/logo.png" alt="metamasklogo" class="meta-mask-logo">
+        <h1 class="fw-bold h1 display-3">No metamask Installed!</h1>
+        <h2 class="text-center">Please use a browser that supports MetaMask and download it as an extension!</h2>
+    </div>
+
+    <!-------------------- In case it actually is present, show the application -------------------------->
+    <div id="isConnected" class="d-flex flex-column justify-content-center align-items-center vh-100">
+
+        <!---------------- Section to physically connect to MetaMask using a button ---------------------->
+        <div class="connection">
+            <h2 id="loginHeader" class="text-center">Log in with Metamask:</h2>
+            <p id="loginMessage">Please log in with Metamask in order to use our application!</p>
+        </div>
+
+        <div id="main" class="d-none vh-100 vw-100">
+        <!---------- Main section to display the application ---------->
+        <nav class="navbar navbar-expand-lg bg-liliac-light sticky-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">CarDealership</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/cars">All Cars</a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="merchantOption" class="nav-link d-none" href="/sell">Sell Cars</a>
+                  </li>
+                </ul>
+                <span id="username" class="navbar-text px-3 fw-bold"></span>
+                <div id="spinner-main" class="spinner-border spinner-border-lg mx-4" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <a class="btn btn-outline-primary" href="/profile">Profile</a>
+              </div>
+            </div>
+          </nav>
+
+        <main id="mainContainer" class="container-fluid d-flex flex-column justify-content-center align-items-center my-3">
+            <div id="spinner-main-container" class="spinner-border spinner-border-lg mx-4" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <!-- CONTENT HEADER. THIS INDICATES THE MESSAGE TO THE USER. DEPENDEND ON THE BLOCKCHAIN DATA -->
+            <section id="contentHeader" class="fade-in d-flex flex-column justify-content-center align-items-center mt-5">
+            </section>
+
+             <!-- CARS SECTION. DISPLAYS SOME OF THE AVAILABLE CARS IF THERE ARE ANY. BLOCKCHAIN DEPENDENT -->
+             <h2 id="carsContainerHeader" class="fade-in mt-4">Browse Cars</h2>
+             <section id="carsContainer" class="fade-in d-flex flex-row justify-content-center align-items-center fs-6 h-50 my-2 overflow-x-auto" style="width: 80%; max-width: 1920px;">
+             </section>
+             <a id="carsButton" href="/cars" class="btn btn-default01 my-2 fade-in">Browse all</a>
+
+            <!-- NEWS CONTAINER - THIS IS STATIC AND DOES NOT DEPEND ON THE BACKEND. ONLY FOR DEMONSTRATION -->
+            <h2 id="newsContainerHeader" class="fade-in mt-4">Recent News</h2>
+            <section id="newsContainer" class="fade-in d-flex overflow-x-auto w-100 fs-6 h-50  my-2 mx-5" style="max-width: 1920px;">
+                <div class="d-flex flex-column mx-4">
+                    <div class="card" style="width: 36rem;">
+                        <img class="card-img" src="https://static.klix.ba/media/images/vijesti/250109039.6_xxl.jpg?v=1736413126" alt="Tesla Model X">
+                        <div class="card-body">
+                            <h5 class="card-title">Tesla Announces Upgraded Model X</h5>
+                            <p class="card-text">
+                                Tesla has unveiled an upgraded version of the Model X featuring improved range, faster charging, and a refreshed interior. Deliveries are set to start next quarter.
+                            </p>
+                            <p class="card-text"><small class="text-muted">Last updated 5 mins ago</small></p>
+                            <a href="https://www.caranddriver.com/tesla/model-x" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-between mx-4">
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">BMW i7 Takes Luxury EV Market by Storm</h5>
+                            <p class="card-text">
+                                BMW's flagship electric sedan, the i7, boasts cutting-edge technology and a range of over 400 miles, making it a strong competitor in the EV space.
+                            </p>
+                            <a href="#" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Toyota to Invest $8B in EV Battery Production</h5>
+                            <p class="card-text">
+                                Toyota is ramping up its electric vehicle efforts with a significant investment in battery technology, aiming to roll out 10 new EV models by 2025.
+                            </p>
+                            <a href="#" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-between mx-4">
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Ford F-150 Lightning Dominates Truck Market</h5>
+                            <p class="card-text">
+                                The electric Ford F-150 Lightning has become a bestseller, with its impressive towing capacity and extended range capturing attention nationwide.
+                            </p>
+                            <a href="#" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Mercedes Introduces Self-Driving Tech</h5>
+                            <p class="card-text">
+                                Mercedes-Benz is rolling out Level 3 autonomous driving in select markets, allowing hands-free operation on highways under specific conditions.
+                            </p>
+                            <a href="#" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-between mx-4">
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Porsche Expands EV Lineup with Macan EV</h5>
+                            <p class="card-text">
+                                Porsche's upcoming Macan EV is set to offer sporty performance and luxury in an electric SUV format, aiming to compete with Tesla's Model Y.
+                            </p>
+                            <a href="#" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Honda CR-V Hybrid Gains Popularity</h5>
+                            <p class="card-text">
+                                The Honda CR-V Hybrid has seen a surge in sales thanks to its improved fuel efficiency, advanced safety features, and affordable price point.
+                            </p>
+                            <a href="#" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-between mx-4">
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Chevrolet Bolt EV Offers Unmatched Value</h5>
+                            <p class="card-text">
+                                The Chevrolet Bolt EV continues to lead the affordable EV segment, with a starting price under $30,000 and a range of 259 miles per charge.
+                            </p>
+                            <a href="#" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Hyundai Ioniq 5 Wins Car of the Year</h5>
+                            <p class="card-text">
+                                The Hyundai Ioniq 5 has been named Car of the Year for its innovative design, excellent range, and fast-charging capabilities.
+                            </p>
+                            <a href="#" class="btn btn-default01">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="p-5 w-100 text-center">
+            IBU @ Blockchain Fundamentals
+        </footer>
+
+        </div>
+    </div>
+    
+    <!-- Web3 and Bootstrap Script for styling -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Script to access the actual contract from the frontend: -->
+     <script src="js/utils.js"></script>
+    <script src="js/web3provider.js"></script>
+    <script>
+        const username = document.querySelector("#username")
+        const spinner_main = document.querySelector("#spinner-main")
+        const spinner_main_container = document.querySelector("#spinner-main-container")
+        const mechant_option = document.querySelector("#merchantOption")
+        const content = document.querySelector("#contentHeader")
+        const news_header = document.querySelector("#newsContainerHeader")
+        const news_container = document.querySelector("#newsContainer")
+        const cars_header = document.querySelector("#carsContainerHeader")
+        const cars_container = document.querySelector("#carsContainer")
+        const cars_button = document.querySelector("#carsButton")
+
+
+        if (typeof window.ethereum !== 'undefined') {
+            disconnected_div.classList.add("d-none")
+        } else {
+            connected_div.classList.add("d-none")
+        }
+
+        setTimeout(async () => {
+            isMerch = await isMerchant();
+
+            if(isMerch){
+                const merchantData = await getMerchantData();
+                username.innerHTML = merchantData.username;
+                spinner_main.classList.add("d-none")
+                spinner_main_container.classList.add("d-none")
+                mechant_option.classList.remove("d-none")
+                content.classList.add('show')
+
+                content.innerHTML += 
+                `
+                <h1> Welcome back ${merchantData.first_name}!</h1>
+                <p class="fs-4"><em>Browse available cars and recent articles</em></p>
+                `
+
+                setTimeout(() => {
+                    cars_header.classList.add("show")
+                    cars_button.classList.add('show')
+                })
+                setTimeout(Utils.loadThumbnailCars(cars_container), 300)
+
+                setTimeout(() => {
+                    news_header.classList.add('show')
+                    news_container.classList.add('show')
+                }, 800)
+            } else {
+                const customerData = await getCustomerData();
+                username.innerHTML = customerData.username;
+                spinner_main.classList.add("d-none")
+                spinner_main_container.classList.add("d-none")
+                content.classList.add('show')
+
+                content.innerHTML += 
+                `
+                <h1> Welcome back ${customerData.first_name}!</h1>
+                <p class="fs-4"><em>Browse available cars and recent articles</em></p>
+                `
+
+                setTimeout(Utils.loadThumbnailCars(cars_container), 300)
+
+                setTimeout(() => {
+                    news_container.classList.add('show')
+                }, 800)
+            }
+
+        }, 500)
+      
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+
+@keyframes wiggle {
+    0% {transform: rotate(0deg);}
+    25% {transform: rotate(30deg);}
+    75% {transform: rotate(-30deg);}
+    100% {transform: rotate(0deg);}
+}
+
+.meta-mask-logo{
+    position: absolute;
+    width: 50%;
+    z-index: -10;
+    opacity: 0.2;
+    animation: wiggle;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+.btn:hover{
+    border-color: #0d6efd;
+}

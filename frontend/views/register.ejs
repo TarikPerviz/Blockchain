@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HajroTare | CarDealership</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-liliac text-white kumbh-sans-regular d-flex flex-column justify-content-center align-items-center vh-100 fs-4">
+    <img src="assets/loginbg.png" alt="bgdrop" id="backdrop">
+    <h1 class="text-center">Register</h1>
+    <p class="text-center">Because you haven't accessed CarDealership, please register as either a Merchant or Customer!</p>
+    <div class="btn-group py-5" role="group" aria-label="User Type">
+        <button id="customerButton" type="button" class="btn btn-custom01 btn-register" data-bs-toggle="modal" data-bs-target="#customerModal">Customer</button>
+        <button id="merchantButton" type="button" class="btn btn-custom02 btn-register" data-bs-toggle="modal" data-bs-target="#merchantModal">Merchant</button>
+    </div>
+    <p id="info" class="text-center fw-bold">Choose your role! Please be careful: This action is IRREVERSIBLE!</p>
+
+    <!--------------- CUSTOMER REGISTER MODAL ----------------->
+    <div class="modal fade" id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="customerModalLabel">Register as Customer</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="fs-5">Register as a <strong>Customer.</strong> This has no impact on the login, but is rather used for displaying convenience!</p>
+                <div id="spinner-form-customer" class="text-center spinner-border spinner-border-lg m-4 d-none" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <form class="d-flex flex-column" id="customerForm" novalidate>
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="cfirstName" placeholder="Enter your first name" required>
+                        <div class="invalid-feedback">
+                            Please provide your first name.
+                        </div>
+                    </div>
+                    
+                    <!-- Last Name -->
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="clastName" placeholder="Enter your last name" required>
+                        <div class="invalid-feedback">
+                            Please provide your last name.
+                        </div>
+                    </div>
+                    
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="cusername" placeholder="Choose a username" required>
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                    </div>
+                    
+                    <!-- Favorite Car Brand -->
+                    <div class="mb-3">
+                        <label for="carBrand" class="form-label">Favorite Car Brand</label>
+                        <select class="form-select" id="ccarBrand" required>
+                            <option value="">Select your favorite car brand</option>
+                            <option value="0">BMW</option>
+                            <option value="1">Mercedes</option>
+                            <option value="2">Audi</option>
+                            <option value="3">Volkswagen</option>
+                            <option value="4">Skoda</option>
+                            <option value="5">Ferrari</option>
+                            <option value="6">Lamborghini</option>
+                            <option value="7">Seat</option>
+                            <option value="8">Renault</option>
+                            <option value="9">Ford</option>
+                            <option value="10">Fiat</option>
+                            <option value="11">Suzuki</option>
+                            <option value="12">Other</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select your favorite car brand.
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button id="customerSubmit" type="submit" class="btn btn-default01">Register as Customer</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!--------------- MERCHANT REGISTER MODAL ----------------->
+    <div class="modal fade" id="merchantModal" tabindex="-1" aria-labelledby="merchantModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="merchantModalLabel">Register as Merchant</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="fs-5">Register as a <strong>Merchant</strong> This has no impact on the login, but is rather used for displaying convenience!</p>
+                <div id="spinner-form-merchant" class="spinner-border spinner-border-lg m-4 d-none" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <form class="d-flex flex-column" id="merchantForm" novalidate>
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="mfirstName" placeholder="Enter your first name" required>
+                        <div class="invalid-feedback">
+                            Please provide your first name.
+                        </div>
+                    </div>
+                    
+                    <!-- Last Name -->
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="mlastName" placeholder="Enter your last name" required>
+                        <div class="invalid-feedback">
+                            Please provide your last name.
+                        </div>
+                    </div>
+                    
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="musername" placeholder="Choose a username" required>
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                    </div>
+                    
+                    <!-- Favorite Car Brand -->
+                    <div class="mb-3">
+                        <label for="carBrand" class="form-label">Favorite Car Brand</label>
+                        <select class="form-select" id="mcarBrand" required>
+                            <option value="">Select your favorite car brand</option>
+                            <option value="0">BMW</option>
+                            <option value="1">Mercedes</option>
+                            <option value="2">Audi</option>
+                            <option value="3">Volkswagen</option>
+                            <option value="4">Skoda</option>
+                            <option value="5">Ferrari</option>
+                            <option value="6">Lamborghini</option>
+                            <option value="7">Seat</option>
+                            <option value="8">Renault</option>
+                            <option value="9">Ford</option>
+                            <option value="10">Fiat</option>
+                            <option value="11">Suzuki</option>
+                            <option value="12">Other</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select your favorite car brand.
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button id="merchantSubmit" type="submit" class="btn btn-default01">Register as Merchant</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+</body>
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="js/web3provider.js"></script>
+<script>
+// Scripts only relevant to the actual register page
+    const customer_button = document.querySelector("#customerButton");
+    const merchant_button = document.querySelector("#merchantButton");
+    const infoMessage = document.querySelector("#info");
+
+    customer_button.addEventListener("mouseenter", () => {
+        infoMessage.innerHTML = "Customers can only buy/rent cars from other Merchants! They cannot add or remove cars!"
+    })
+
+    customer_button.addEventListener("mouseleave", () => {
+        infoMessage.innerHTML = "Choose your role! Please be careful: This action is IRREVERSIBLE!"
+    })
+
+    merchant_button.addEventListener("mouseenter", () => {
+        infoMessage.innerHTML = "Merchants also have the ability to sell cars on the platforms. They can add and remove cars!"
+    })
+
+    merchant_button.addEventListener("mouseleave", () => {
+        infoMessage.innerHTML = "Choose your role! Please be careful: This action is IRREVERSIBLE!"
+    })
+
+    const customer_form = document.getElementById('customerForm');
+    customer_form.addEventListener("submit", async (e) => {
+        if (!customer_form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            e.preventDefault();
+
+            const spinner_customer = document.querySelector("#spinner-form-customer")
+            spinner_customer.classList.remove("d-none");
+            customer_form.classList.add("d-none")
+
+            const first_name = document.querySelector("#cfirstName").value;
+            console.log(first_name);
+            const last_name = document.querySelector("#clastName").value;
+            console.log(last_name);
+            const username = document.querySelector("#cusername").value;
+            console.log(username);
+            const car_brand_name = document.querySelector("#ccarBrand").value;
+            console.log(car_brand_name);
+
+            await addCustomer(first_name, last_name, username, car_brand_name);
+            window.location.href = "/pending";
+        }
+        customer_form.classList.add('was-validated');
+    })
+
+    const merchant_form = document.getElementById('merchantForm');
+    merchant_form.addEventListener("submit", async (e) => {
+        if (!merchant_form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            
+        e.preventDefault();
+
+        const spinner_merchant = document.querySelector("#spinner-form-merchant")
+        spinner_merchant.classList.remove("d-none");
+        merchant_form.classList.add("d-none")
+
+        const first_name = document.querySelector("#mfirstName").value;
+        console.log(first_name);
+        const last_name = document.querySelector("#mlastName").value;
+        console.log(last_name);
+        const username = document.querySelector("#musername").value;
+        console.log(username);
+        const car_brand_name = document.querySelector("#mcarBrand").value;
+        console.log(car_brand_name);
+
+        await addMerchant(first_name, last_name, username, car_brand_name);
+        window.location.href = "/pending";
+        }
+        merchant_form.classList.add('was-validated');
+    })
+
+
+
+</script>
+</html>

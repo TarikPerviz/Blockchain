@@ -1,0 +1,55 @@
+.kumbh-sans-regular {
+    font-family: "Kumbh Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+      "YOPQ" 300;
+  }
+
+.kumbh-sans-bold {
+    font-family: "Kumbh Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-variation-settings:
+      "YOPQ" 300;
+  }
+  
+  
+.bg-liliac{
+ background-color: #03011f;
+}
+
+.bg-liliac-light{
+    background-color: #1b2f4d;
+   }
+   
+
+
+.btn-custom01{
+    background-color: #062f65;
+    color: white;
+}
+
+.btn-custom02{
+    background-color: #08677e;
+    color: white;
+}
+
+.btn-default01{
+    background-color: #003e70;
+    color: white;
+}
+
+.fade-in {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+}
+
+.fade-in.show {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
