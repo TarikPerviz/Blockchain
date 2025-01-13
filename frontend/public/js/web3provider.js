@@ -9,13 +9,6 @@ const books_section = document.querySelector("#books_section");
 const book_returned = document.querySelector("#book_returned");
 const log_in_header = document.querySelector("#loginHeader");
 
-// Showing a message if the MetaMask extension is not avaliable!
-// if (typeof window.ethereum !== 'undefined') {
-//     disconnected_div.classList.add("d-none")
-// } else {
-//     connected_div.classList.add("d-none")
-// }
-
 // Required variables and constants to connect:
 const contract_address = "0x9eD6Aae2EcCB14Bc633E95DdF719ae01077C645e";
 const abi = [{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"},{"indexed":false,"internalType":"enum CarDealership.CarBrand","name":"brand","type":"uint8"}],"name":"CarAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"username","type":"string"},{"indexed":false,"internalType":"address","name":"add","type":"address"}],"name":"CustomerAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"username","type":"string"},{"indexed":false,"internalType":"address","name":"add","type":"address"}],"name":"MerchantAdded","type":"event"},{"inputs":[{"internalType":"string","name":"_name","type":"string"},{"internalType":"enum CarDealership.CarBrand","name":"_brand","type":"uint8"},{"internalType":"string","name":"_model","type":"string"},{"internalType":"uint256","name":"_prod_year","type":"uint256"},{"internalType":"uint256","name":"_kilometers","type":"uint256"},{"internalType":"enum CarDealership.Engine","name":"_engine","type":"uint8"},{"internalType":"uint256","name":"_price","type":"uint256"},{"internalType":"uint256","name":"_displacement","type":"uint256"},{"internalType":"string","name":"_image_url","type":"string"}],"name":"addCarForSale","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_first_name","type":"string"},{"internalType":"string","name":"_last_name","type":"string"},{"internalType":"string","name":"_username","type":"string"},{"internalType":"enum CarDealership.CarBrand","name":"_brand","type":"uint8"}],"name":"addCustomer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_first_name","type":"string"},{"internalType":"string","name":"_last_name","type":"string"},{"internalType":"string","name":"_username","type":"string"},{"internalType":"enum CarDealership.CarBrand","name":"_brand","type":"uint8"}],"name":"addMerchant","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allCars","outputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"address","name":"merchant_address","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"enum CarDealership.CarBrand","name":"brand","type":"uint8"},{"internalType":"string","name":"model","type":"string"},{"internalType":"uint256","name":"production_year","type":"uint256"},{"internalType":"uint256","name":"kilometers","type":"uint256"},{"internalType":"bool","name":"for_sale","type":"bool"},{"internalType":"enum CarDealership.Engine","name":"engine","type":"uint8"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"uint256","name":"engine_displacement","type":"uint256"},{"internalType":"string","name":"image_url","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_carId","type":"uint256"}],"name":"buyCar","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"checkRegister","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"customers","outputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"first_name","type":"string"},{"internalType":"string","name":"last_name","type":"string"},{"internalType":"string","name":"username","type":"string"},{"internalType":"enum CarDealership.CarBrand","name":"favourite_car_brand","type":"uint8"},{"internalType":"address","name":"customer_address","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_carId","type":"uint256"}],"name":"deleteCar","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getMerchantCars","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getUserCars","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isMerchant","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"isRegistered","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"loadAvailableCars","outputs":[{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"address","name":"merchant_address","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"enum CarDealership.CarBrand","name":"brand","type":"uint8"},{"internalType":"string","name":"model","type":"string"},{"internalType":"uint256","name":"production_year","type":"uint256"},{"internalType":"uint256","name":"kilometers","type":"uint256"},{"internalType":"bool","name":"for_sale","type":"bool"},{"internalType":"enum CarDealership.Engine","name":"engine","type":"uint8"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"uint256","name":"engine_displacement","type":"uint256"},{"internalType":"string","name":"image_url","type":"string"}],"internalType":"struct CarDealership.Car[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_carId","type":"uint256"}],"name":"loadCarById","outputs":[{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"address","name":"merchant_address","type":"address"},{"internalType":"string","name":"name","type":"string"},{"internalType":"enum CarDealership.CarBrand","name":"brand","type":"uint8"},{"internalType":"string","name":"model","type":"string"},{"internalType":"uint256","name":"production_year","type":"uint256"},{"internalType":"uint256","name":"kilometers","type":"uint256"},{"internalType":"bool","name":"for_sale","type":"bool"},{"internalType":"enum CarDealership.Engine","name":"engine","type":"uint8"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"uint256","name":"engine_displacement","type":"uint256"},{"internalType":"string","name":"image_url","type":"string"}],"internalType":"struct CarDealership.Car","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"merchant_cars","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"merchants","outputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"first_name","type":"string"},{"internalType":"string","name":"last_name","type":"string"},{"internalType":"string","name":"username","type":"string"},{"internalType":"enum CarDealership.CarBrand","name":"favourite_car_brand","type":"uint8"},{"internalType":"uint256","name":"cars_for_Sale","type":"uint256"},{"internalType":"address","name":"merchant_address","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_carId","type":"uint256"}],"name":"removeCarFromInventory","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"user_cars","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
@@ -53,24 +46,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-
-// contract.events.CustomerAdded({fromBlock: 'latest' })
-// .on('data', (event) => {
-//     console.log('Customer Added:', event.returnValues);
-//     // Handle the event data (e.g., show a notification)
-//     alert(`New customer added: ${event.returnValues.firstName}`);
-// })
-// .on('error', (error) => {
-//     console.error('Error listening for event:', error);
-// });
-
-
-
 async function initializeContract() {
     console.log("In the contract initializer");
     if (!web3) {
         web3 = new Web3(window.ethereum);
-        // console.error("Web3 is not initialized. Cannot create the contract.");
         return;
     }
     contract = await new web3.eth.Contract(abi, contract_address);
@@ -221,11 +200,11 @@ async function addCarForSale(
     }
 }
 
-async function buyCar(id){
+async function buyCar(id, carPrice){
     contract = await new web3.eth.Contract(abi, contract_address);
     try{
         console.log("Trying to buy...");
-        await contract.methods.buyCar(id).send({from: account})
+        await contract.methods.buyCar(id).send({from: account, value: carPrice})
     } catch (err){
         console.log("Error while adding car: ", err)
     }

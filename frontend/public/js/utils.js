@@ -189,7 +189,7 @@ const Utils = {
             <p class="fs-4 mb-0 text-end"><strong>Price:</strong>  ${carDetails.price}</p>
             ${
                 !isMerch
-                    ? `<button class="btn btn-default01 w-100 h-25" onClick=Utils.buyCarFunc(${carDetails.id})>Buy car</button>`
+                    ? `<button class="btn btn-default01 w-100 h-25" onClick=Utils.buyCarFunc(${carDetails.id},${carDetails.price})>Buy car</button>`
                     : ""
             }
         `
@@ -198,8 +198,8 @@ const Utils = {
         modal.show();
     },
 
-    buyCarFunc : async (id) => {
-        await buyCar(id)
+    buyCarFunc : async (id, carPrice) => {
+        await buyCar(id, carPrice)
     },
 
     getCarBrandName : (value) => {
